@@ -1,0 +1,98 @@
+$txt-color: blue;
+
+@mixin flexMid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin fontStuff($couleur, $valeur) {
+  #{$couleur}: $valeur;
+}
+
+@mixin positionner($fond, $x: 50%, $y: 50%) {
+  position: absolute;
+  left: $x;
+  top: $y;
+  transform: translate(-$x, -$y);
+  background: $fond;
+  @if $fond != salmon {
+    border-radius: 50%;
+  }
+}
+
+@function add($a, $b) {
+  @return $a + $b;
+}
+
+body {
+  background-color: cadetblue;
+  font-family: sans-serif;
+  height: add(50vh, 50vh);
+}
+
+.item {
+  color: $txt-color;
+}
+
+.container {
+  background: #333;
+
+  .nav {
+    width: 10%;
+
+    li {
+      font-family: "Agency FB";
+      font-size: 1.5em;
+
+      &:first-child {
+        color: red;
+      }
+    }
+  }
+}
+
+.boxP {
+  @include flexMid;
+  @include positionner(violet);
+  width: 300px;
+  height: 300px;
+  box-shadow: 0px 0px 10px black;
+}
+
+.boxE {
+  width: 100px;
+  height: 100px;
+  background-color: aqua;
+  box-shadow: inset 0px 0px 4px black;
+
+}
+
+.titre {
+  @include fontStuff(color, white);
+  font-size: 1.2em;
+  font-weight: 600;
+  font-family: Serif;
+}
+
+.titre2 {
+  @extend .titre;
+  color: green;
+}
+
+@mixin enfants($desc...) {
+  @for $i from 0 to length($desc) {
+    #{nth($desc, $i+1)} {
+      font-size: 30px + $i * 10;
+      // @debug "debug" #{$i};
+      /*@if $i > 1 {
+        // @error "Limite dépassée";
+        @warn "Limite dépassée";
+      }*/
+    }
+  }
+}
+
+.parent {
+  @include enfants('.enfant1', '.enfant2', '.enfant3');
+}
