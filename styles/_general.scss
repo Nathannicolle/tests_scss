@@ -1,0 +1,58 @@
+body {
+  background-color: cadetblue;
+  font-family: sans-serif;
+  height: add(50vh, 50vh);
+}
+
+.item {
+  color: $txt-color;
+}
+
+.container {
+  background: #333;
+
+  .nav {
+    width: 10%;
+
+    li {
+      font-family: "Agency FB";
+      font-size: 1.5em;
+
+      &:first-child {
+        color: red;
+      }
+    }
+  }
+}
+
+.boxP {
+  @include flexMid;
+  @include positionner(violet);
+  width: 300px;
+  height: 300px;
+  box-shadow: 0px 0px 10px black;
+}
+
+.boxE {
+  width: 100px;
+  height: 100px;
+  background-color: aqua;
+  box-shadow: inset 0px 0px 4px black;
+
+}
+
+.titre {
+  @include fontStuff(color, white);
+  font-size: 1.2em;
+  font-weight: 600;
+  font-family: Serif;
+}
+
+.titre2 {
+  @extend .titre;
+  color: green;
+}
+
+.parent {
+  @include enfants('.enfant1', '.enfant2', '.enfant3');
+}

@@ -1,0 +1,37 @@
+@mixin flexMid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin fontStuff($couleur, $valeur) {
+  #{$couleur}: $valeur;
+}
+
+@mixin positionner($fond, $x: 50%, $y: 50%) {
+  position: absolute;
+  left: $x;
+  top: $y;
+  transform: translate(-$x, -$y);
+  background: $fond;
+  @if $fond != salmon {
+    border-radius: 50%;
+  }
+}
+
+@mixin enfants($desc...) {
+  @for $i from 0 to length($desc) {
+    #{nth($desc, $i+1)} {
+      font-size: 30px + $i * 10;
+      // @debug "debug" #{$i};
+      /*@if $i > 1 {
+        // @error "Limite dépassée";
+        @warn "Limite dépassée";
+      }*/
+    }
+  }
+}
+
+@function add($a, $b) {
+  @return $a + $b;
+}
